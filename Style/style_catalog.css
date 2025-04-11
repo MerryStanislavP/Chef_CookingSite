@@ -1,0 +1,345 @@
+
+    .recipe-app {
+        display: flex;
+        min-height: 100vh;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .recipe-content {
+        flex: 1;
+        padding: 2rem;
+        margin-right: 320px; /* Для sidebar */
+    }
+
+    /* Шапка */
+    .recipe-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .recipe-header h1 {
+        font-size: 2.8rem;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        color: #7f8c8d;
+        margin-bottom: 1.5rem;
+    }
+
+    .search-bar {
+        display: flex;
+        max-width: 600px;
+    }
+
+    .search-bar input {
+        flex: 1;
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px 0 0 8px;
+        font-size: 1rem;
+    }
+
+    .search-btn {
+        padding: 0 1.5rem;
+        background: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 0 8px 8px 0;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    /* Сетка рецептов */
+    .recipe-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.8rem;
+    }
+
+    .recipe-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .recipe-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .card-image {
+        position: relative;
+        height: 200px;
+    }
+
+    .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .time-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+
+    .favorite-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255,255,255,0.8);
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .favorite-btn:hover {
+        background: white;
+        transform: scale(1.1);
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-body h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+        color: #2c3e50;
+    }
+
+    .description {
+        color: #7f8c8d;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .category-tag {
+        background: #ecf0f1;
+        color: #34495e;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+    }
+
+    .details-btn {
+        color: #e74c3c;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+
+    .details-btn:hover {
+        color: #c0392b;
+    }
+
+    /* Боковая панель фильтров */
+    .filter-sidebar {
+        width: 300px;
+        background: white;
+        padding: 2rem;
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.05);
+        overflow-y: auto;
+    }
+
+    .filter-section {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #ecf0f1;
+    }
+
+    .filter-section h3 {
+        font-size: 1.2rem;
+        color: #2c3e50;
+        margin-bottom: 1.2rem;
+    }
+
+    .time-range {
+        padding: 0 0.5rem;
+    }
+
+    .slider {
+        width: 100%;
+        height: 6px;
+        appearance: none; /* ✔ современный способ */
+        -webkit-appearance: none; /* для WebKit-браузеров */
+        background: #ddd;
+        border-radius: 3px;
+        outline: none;
+        margin-bottom: 0.5rem;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        background: #e74c3c;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .time-labels {
+        display: flex;
+        justify-content: space-between;
+        color: #7f8c8d;
+        font-size: 0.9rem;
+    }
+
+    .category-filters {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .filter-checkbox {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+        padding-left: 30px;
+        user-select: none;
+        color: #34495e;
+    }
+
+    .filter-checkbox input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .checkmark {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 4px;
+    }
+
+    .filter-checkbox:hover input ~ .checkmark {
+        background-color: #ddd;
+    }
+
+    .filter-checkbox input:checked ~ .checkmark {
+        background-color: #e74c3c;
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .filter-checkbox input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    .filter-checkbox .checkmark:after {
+        left: 7px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+    .tag-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tag {
+        background: #ecf0f1;
+        color: #34495e;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .tag:hover, .tag.active {
+        background: #e74c3c;
+        color: white;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 1024px) {
+        .filter-sidebar {
+            transform: translateX(100%);
+            transition: transform 0.3s;
+        }
+        
+        .filter-sidebar.active {
+            transform: translateX(0);
+        }
+        
+        .recipe-content {
+            margin-right: 0;
+        }
+        
+        .filter-toggle {
+            display: block;
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #e74c3c;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 100;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .recipe-grid {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+    }
+
+    @media (max-width: 480px) {
+        .recipe-header h1 {
+            font-size: 2rem;
+        }
+        
+        .recipe-grid {
+            grid-template-columns: 1fr;
+        }
+    }

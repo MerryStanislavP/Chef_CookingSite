@@ -1,0 +1,32 @@
+<div class="favorites-page">
+    <h1 class="favorites-title">Обрані рецепти</h1>
+    
+    <?php if (empty($_SESSION['favorites'])): ?>
+        <div class="favorites-empty">
+            <p>У вас поки що немає обраних рецептів</p>
+        </div>
+    <?php else: ?>
+        <div class="favorites-list">
+            <?php foreach (getFavoriteRecipes() as $recipe): ?>
+            <div class="favorites-item" id="favorite-<?= $recipe->id ?>">
+                <div class="favorites-item-img">
+                    <img src="<?= $recipe->image ?>" alt="<?= $recipe->name ?>">
+                </div>
+                <div class="favorites-item-content">
+                    <h3 class="favorites-item-title"><?= $recipe->name ?></h3>
+                    <div class="favorites-item-meta">
+                        <span class="favorites-item-category"><?= $recipe->category ?></span>
+                        <span class="favorites-item-time"><?= $recipe->price ?> хв</span>
+                    </div>
+                    <div class="favorites-item-actions">
+                        <button class="favorites-remove-btn" data-id="<?= $recipe->id ?>">
+                            <img src="Images/remove-icon.png" alt="Видалити" class="remove-icon">
+                        </button>
+                        <a href="recipe.php?id=<?= $recipe->id ?>" class="favorites-view-btn">Детальніше</a>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,14 @@
+/* Стилі для підвалу */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+}

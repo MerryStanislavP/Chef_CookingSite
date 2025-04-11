@@ -1,0 +1,32 @@
+<div class="recipe-page">
+    <img src="<?= $this->recipe->image ?>" alt="<?= $this->recipe->name ?>">
+    <h1><?= $this->recipe->name ?></h1>
+    <span class="category"><?= $this->recipe->category ?></span>
+    <div class="time">
+        <img src="Images/time.png" alt="Час приготування">
+        <span>Час приготування: <?= $this->recipe->price ?> хвилин</span>
+    </div>
+    <p class="description"><?= $this->recipe->description ?></p>
+    
+    <div class="recipe-section">
+        <h2>Інгредієнти</h2>
+        <ul>
+            <?php foreach ($this->recipe->ingredients as $ingredient): ?>
+                <li><?= $ingredient ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    
+    <div class="recipe-section">
+        <h2>Інструкція приготування</h2>
+        <ol>
+            <?php foreach ($this->recipe->instructions as $step): ?>
+                <li><?= $step ?></li>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+    
+    <button class="favorite-btn" data-id="<?= $this->recipe->id ?>">
+        <?= isset($_SESSION['favorites'][$this->recipe->id]) ? '❤️' : '🤍' ?>
+    </button>
+</div>

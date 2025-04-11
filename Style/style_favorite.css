@@ -1,0 +1,113 @@
+.favorites-page {
+    padding: 100px 20px 40px; /* відступ зверху щоб не перекривало шапку/лого */
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.favorites-title {
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Список обраних — flex у ряд з переносом */
+.favorites-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: flex-start;
+}
+
+/* Картка рецепта */
+.favorites-item {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.favorites-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Зображення фіксоване */
+.favorites-item-img {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.favorites-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Контент картки */
+.favorites-item-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.favorites-item-title {
+    font-size: 20px;
+    margin: 0;
+}
+
+.favorites-item-meta {
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    justify-content: space-between;
+}
+
+.favorites-item-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.favorites-remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.favorites-remove-btn img {
+    width: 30px;
+    height: 20px;
+}
+
+.favorites-view-btn {
+    text-decoration: none;
+    background-color: #ff6b6b;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.favorites-view-btn:hover {
+    background-color: #e05555;
+}
+
+/* Порожній список */
+.favorites-empty {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+    margin-top: 50px;
+}
+

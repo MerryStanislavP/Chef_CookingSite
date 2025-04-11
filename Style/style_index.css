@@ -1,0 +1,116 @@
+/* Основні стилі для головної сторінки */
+.site-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.overview-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.overview-card:hover {
+    transform: translateY(-5px);
+}
+
+.cta-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    background: #ff6b6b;
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #ff5252;
+}
+
+.categories-preview {
+    margin: 4rem 0;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.category-card {
+    padding: 1.5rem 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover {
+    background: #ff6b6b;
+    color: white;
+}
+
+.weekly-featured {
+    margin: 4rem 0;
+}
+
+.featured-recipe {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.featured-recipe img {
+    flex: 1 1 300px;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.featured-content {
+    flex: 2 1 400px;
+    padding: 2rem;
+}
+
+.recipe-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    color: #666;
+}
+
+.search-preview {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.search-preview input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 50px 0 0 50px;
+}
+
+.search-preview button {
+    padding: 0 1.5rem;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 0 50px 50px 0;
+    cursor: pointer;
+}

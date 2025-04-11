@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кулінарний сайт - Головна</title>
+    <link rel="stylesheet" href="Style/style_index.css">
+</head>
+<body>
+    <div class="recipe-content">
+        <header class="recipe-header">
+            <h1>Ласкаво просимо на кулінарний сайт!</h1>
+            <p class="subtitle">Ваш надійний помічник у світі смачної та легкої кухні</p>
+        </header>
+
+        <section class="site-overview">
+            <div class="overview-card">
+                <h2>📋 Каталог рецептів</h2>
+                <p>Понад 1000 перевірених рецептів на будь-який смак: від класичних страв до авторських кулінарних шедеврів.</p>
+                <a href="catalog.php" class="cta-button">Перейти до каталогу →</a>
+            </div>
+
+            <div class="overview-card">
+                <h2>❤️ Обрані рецепти</h2>
+                <p>Зберігайте улюблені рецепти у персональній колекції для швидкого доступу.</p>
+                <a href="favorite.php" class="cta-button">Моя колекція →</a>
+            </div>
+
+            <div class="overview-card">
+                <h2>🔍 Зручний пошук</h2>
+                <p>Знаходьте ідеальні рецепти за інгредієнтами, часом приготування або особливими побажаннями.</p>
+                <div class="search-preview">
+                    <input type="text" placeholder="Спробуйте знайти...">
+                    <button>Пошук</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="categories-preview">
+            <h2>Популярні категорії</h2>
+            <div class="categories-grid">
+                <a href="catalog.php?category=Супи" class="category-card">🍜 Супи</a>
+                <a href="catalog.php?category=Основні страви" class="category-card">🍛 Основні страви</a>
+                <a href="catalog.php?category=Салати" class="category-card">🥗 Салати</a>
+                <a href="catalog.php?category=Десерти" class="category-card">🍰 Десерти</a>
+                <a href="catalog.php?category=Випічка" class="category-card">🥖 Випічка</a>
+                <a href="catalog.php?category=Вегетаріанські" class="category-card">🌱 Вегетаріанські</a>
+            </div>
+        </section>
+
+        <section class="weekly-featured">
+            <h2>💡 Рецепт тижня</h2>
+            <div class="featured-recipe">
+                <img src="Images/pizza.jpg" alt="Рецепт тижня">
+                <div class="featured-content">
+                    <h3>Домашня піца з трьома видами сиру</h3>
+                    <p>Ідеальне поєднання хрусткої скоринки, ніжного томатного соусу та ароматних сирів.</p>
+                    <div class="recipe-meta">
+                        <span>⏱ 40 хв</span>
+                        <span>🍕 4 порції</span>
+                        <span>⭐ 4.9/5</span>
+                    </div>
+                    <a href="recipe.php?id=5" class="cta-button">Дивитися рецепт →</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

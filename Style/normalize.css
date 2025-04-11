@@ -1,0 +1,55 @@
+html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  body {
+    margin: 0;
+  }
+  
+  main {
+    display: block;
+  }
+  
+  a {
+    background-color: transparent;
+  }
+  
+  img {
+    border-style: none;
+  }
+  
+  button,
+  input {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+  }
+  
+  button,
+  input {
+    overflow: visible;
+  }
+  
+  button {
+    text-transform: none;
+  }
+  
+  [type="button"],
+  button {
+    appearance: button;
+    -webkit-appearance: button;
+  }
+  
+  [type="button"]::-moz-focus-inner,
+  button::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
+  
+  [type="button"]:-moz-focusring,
+  button:-moz-focusring {
+    outline: 1px dotted ButtonText;
+  }
+  
