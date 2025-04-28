@@ -5,7 +5,8 @@ require_once '../Class/recipes.php';
 $offset = $_POST['offset'] ?? 0;
 $limit = $_POST['limit'] ?? 6;
 
-$allRecipes = getSampleRecipes();
+$recipeManager = new Recipe();
+$allRecipes = $recipeManager->getAllRecipes();
 $recipes = array_slice($allRecipes, $offset, $limit);
 $hasMore = ($offset + $limit) < count($allRecipes);
 

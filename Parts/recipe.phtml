@@ -1,32 +1,70 @@
-<div class="recipe-page">
-    <img src="<?= $this->recipe->image ?>" alt="<?= $this->recipe->name ?>">
-    <h1><?= $this->recipe->name ?></h1>
-    <span class="category"><?= $this->recipe->category ?></span>
-    <div class="time">
-        <img src="Images/time.png" alt="Час приготування">
-        <span>Час приготування: <?= $this->recipe->price ?> хвилин</span>
+<div class="recipe">
+    <div class="recipe-header">
+        <h1><?= htmlspecialchars($recipe['name']) ?></h1>
+        <div class="recipe-meta">
+            <span class="category"><?= htmlspecialchars($recipe['category_name']) ?></span>
+            <span class="time">Час приготування: <?= $recipe['prep_time_min'] + $recipe['cook_time_min'] ?> хв</span>
+            <span class="servings">Порцій: <?= $recipe['servings'] ?></span>
+        </div>
     </div>
-    <p class="description"><?= $this->recipe->description ?></p>
-    
-    <div class="recipe-section">
-        <h2>Інгредієнти</h2>
-        <ul>
-            <?php foreach ($this->recipe->ingredients as $ingredient): ?>
-                <li><?= $ingredient ?></li>
-            <?php endforeach; ?>
-        </ul>
+
+    <div class="recipe-content">
+        <div class="recipe-image">
+            <img src="<?= htmlspecialchars($recipe['image']) ?>" alt="<?= htmlspecialchars($recipe['name']) ?>">
+        </div>
+
+        <div class="recipe-description">
+            <h2>Опис</h2>
+            <p><?= nl2br(htmlspecialchars($recipe['description'])) ?></p>
+        </div>
+
+        <div class="recipe-ingredients">
+            <h2>Інгредієнти</h2>
+            <ul>
+                <?php foreach ($ingredients as $ingredient): ?>
+                    <li>
+                        <?= htmlspecialchars($ingredient['name']) ?> - 
+                        <?= htmlspecialchars($ingredient['quantity']) ?> 
+                        <?= htmlspecialchars($ingredient['unit']) ?>
+                        <?php if ($ingredient['note']): ?>
+                            (<?= htmlspecialchars($ingredient['note']) ?>)
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+        <div class="recipe-steps">
+            <h2>Кроки приготування</h2>
+            <ol>
+                <?php foreach ($steps as $step): ?>
+                    <li>
+                        <?= nl2br(htmlspecialchars($step['text'])) ?>
+                        <?php if ($step['image']): ?>
+                            <img src="<?= htmlspecialchars($step['image']) ?>" alt="Крок <?= $step['step_no'] ?>">
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+
+        <div class="recipe-tags">
+            <h2>Теги</h2>
+            <div class="tags-list">
+                <?php foreach ($tags as $tag): ?>
+                    <span class="tag"><?= htmlspecialchars($tag) ?></span>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <div class="recipe-actions">
+            <button class="favorite-btn" data-id="<?= $recipe['id'] ?>">
+                <?php if ($user && isset($_SESSION['user_id'])): ?>
+                    <?= $user->isFavorite($_SESSION['user_id'], $recipe['id']) ? '❤️' : '🤍' ?>
+                <?php else: ?>
+                    🤍
+                <?php endif; ?>
+            </button>
+        </div>
     </div>
-    
-    <div class="recipe-section">
-        <h2>Інструкція приготування</h2>
-        <ol>
-            <?php foreach ($this->recipe->instructions as $step): ?>
-                <li><?= $step ?></li>
-            <?php endforeach; ?>
-        </ol>
-    </div>
-    
-    <button class="favorite-btn" data-id="<?= $this->recipe->id ?>">
-        <?= isset($_SESSION['favorites'][$this->recipe->id]) ? '❤️' : '🤍' ?>
-    </button>
 </div>

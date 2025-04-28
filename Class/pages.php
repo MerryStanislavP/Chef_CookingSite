@@ -18,9 +18,6 @@ class Page
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        if (!isset($_SESSION['favorites'])) {
-            $_SESSION['favorites'] = [];
-        }
     }
 
     public function ShowHeader()
@@ -41,54 +38,134 @@ class Page
 
 class MainPage extends Page 
 {
-    public function __construct()
+    private $recipes;
+    private $categories;
+    private $user;
+
+    public function __construct($recipes, $categories, $user = null)
     {
         parent::__construct("Кулінарний сайт");
-        require_once 'Class/recipes.php';
+        $this->recipes = $recipes;
+        $this->categories = $categories;
+        $this->user = $user;
+    }
+
+    public function ShowContent()
+    {
+        $recipes = $this->recipes;
+        $categories = $this->categories;
+        $user = $this->user;
+        include "Parts/index.phtml";
     }
 }
 
 class RecipePage extends Page 
 {
     public $recipe;
+    public $ingredients;
+    public $steps;
+    public $tags;
+    public $user;
 
-    public function __construct($recipe)
+    public function __construct($recipe, $ingredients, $steps, $tags, $user = null)
     {
-        parent::__construct($recipe->name);
+        parent::__construct($recipe['name']);
         $this->recipe = $recipe;
+        $this->ingredients = $ingredients;
+        $this->steps = $steps;
+        $this->tags = $tags;
+        $this->user = $user;
         require_once 'Class/recipes.php';
     }
     
     public function ShowContent()
     {
+        $recipe = $this->recipe;
+        $ingredients = $this->ingredients;
+        $steps = $this->steps;
+        $tags = $this->tags;
+        $user = $this->user;
         include "Parts/recipe.phtml";
     }  
 }
 
 class CatalogPage extends Page 
 {
-    public function __construct()
+    private $recipes;
+    private $categories;
+    private $user;
+
+    public function __construct($recipes, $categories, $user = null)
     {
         parent::__construct("Каталог рецептів");
-        require_once 'Class/recipes.php';
+        $this->recipes = $recipes;
+        $this->categories = $categories;
+        $this->user = $user;
     }
     
     public function ShowContent()
     {
+        $recipes = $this->recipes;
+        $categories = $this->categories;
+        $user = $this->user;
         include "Parts/catalog.phtml";
     }   
 }
 
 class FavoritePage extends Page 
 {
-    public function __construct()
+    private $favorites;
+    public function __construct($favorites = [])
     {
         parent::__construct("Обрані рецепти");
+        $this->favorites = $favorites;
         require_once 'Class/recipes.php';
     }
     
     public function ShowContent(){
+        $favorites = $this->favorites;
         include "Parts/favorite.phtml";
     }   
+}
+
+class LoginPage extends Page {
+    private $error;
+    public function __construct($error = '') {
+        parent::__construct("Увійти");
+        $this->error = $error;
+    }
+    public function ShowContent() {
+        $error = $this->error;
+        include "Parts/login.phtml";
+    }
+}
+
+class RegisterPage extends Page {
+    private $error;
+    public function __construct($error = '') {
+        parent::__construct("Реєстрація");
+        $this->error = $error;
+    }
+    public function ShowContent() {
+        $error = $this->error;
+        include "Parts/register.phtml";
+    }
+}
+
+class ProfilePage extends Page {
+    private $error;
+    private $userData;
+
+    public function __construct($error = '', $userData = null) {
+        parent::__construct("Профіль");
+        $this->error = $error;
+        $this->userData = $userData;
+    }
+
+    public function ShowContent() {
+        $error = $this->error;
+        $userData = $this->userData;
+        include "Parts/profile.phtml";
+    }
 }
 ?>

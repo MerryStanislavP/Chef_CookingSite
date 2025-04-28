@@ -33,7 +33,7 @@ function toggleFavorite(recipeId, button) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            button.innerHTML = data.is_favorite ? '❤️' : '🤍';
+            button.innerHTML = data.icon;
             
             // Находим или создаём счётчик
             let counter = document.querySelector('.favorite-counter');

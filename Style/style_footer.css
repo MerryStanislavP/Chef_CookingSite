@@ -1,14 +1,75 @@
-/* Стилі для підвалу */
-footer {
-    background: #333;
-    color: white;
-    text-align: center;
-    padding: 25px 0;
-    margin-top: 50px;
+/* Сучасний стиль футера для кулінарного сайту */
+.site-footer {
+    background: #fdb3b3;
+    padding: 2rem 0 0 0;
+    margin-top: 2rem;
+    border-top: 1px solid #e9ecef;
+    font-family: 'Montserrat', Arial, sans-serif;
 }
 
-footer p {
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.footer-section p, .footer-link {
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: #ff6b6b;
+    text-decoration: underline;
+}
+
+.social-links {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+
+.social-link img {
+    width: 28px;
+    height: 28px;
+    filter: grayscale(1) brightness(0.7);
+    transition: filter 0.2s, transform 0.2s;
+}
+
+.social-link:hover img {
+    filter: none;
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.footer-bottom p {
+    color: #6c757d;
+    font-size: 0.95rem;
     margin: 0;
-    font-size: 14px;
-    color: rgba(255,255,255,0.7);
+}
+
+@media (max-width: 700px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
 }

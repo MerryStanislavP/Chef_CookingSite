@@ -1,80 +1,42 @@
 <?php
-$recipes = getSampleRecipes(); // Отримуємо рецепти з recipes.php
 ?>
-<div class="recipe-app">
-    <!-- Основной контент -->
-    <div class="recipe-content">
-        <header class="recipe-header">
-            <h1>Що приготувати?</h1>
-            <p class="subtitle">Найулюблініші й найакутальніші рецепти тільки тут</p>
-            
-            <div class="search-bar">
-                <input type="text" placeholder="Пошук рецептів...">
-                <button class="search-btn">Знайти</button>
-            </div>
-        </header>
+<div class="catalog">
+    <div class="catalog-header">
+        <h1 class="catalog-title">Каталог рецептів</h1>
+        <nav class="category-topbar">
+            <a href="catalog.php" class="category-top-btn<?= empty($_GET['category']) ? ' active' : '' ?>">Всі рецепти</a>
+            <?php foreach ($categories as $category): ?>
+                <a href="catalog.php?category=<?= $category['id'] ?>" class="category-top-btn<?= (isset($_GET['category']) && $_GET['category'] == $category['id']) ? ' active' : '' ?>">
+                    <?= htmlspecialchars($category['name']) ?>
+                </a>
+            <?php endforeach; ?>
+        </nav>
+    </div>
 
         <main class="recipe-grid">
-            <?php foreach($recipes as $recipe): ?>
-            <div class="recipe-card">
-                <div class="card-image">
-                    <img src="<?= $recipe->image ?>" alt="<?= $recipe->name ?>">
-                    <span class="time-badge"><?= $recipe->price ?> хв</span>
-                    <button class="favorite-btn" data-id="<?= $recipe->id ?>">
-                        <?= isset($_SESSION['favorites'][$recipe->id]) ? '❤️' : '🤍' ?>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <h3><?= $recipe->name ?></h3>
-                    <p class="description"><?= $recipe->description ?></p>
-                    <div class="card-footer">
-                        <span class="category-tag"><?= $recipe->category ?></span>
-                        <a href="recipe.php?id=<?= $recipe->id ?>" class="details-btn">Рецепт →</a>
+            <?php foreach ($recipes as $recipe): ?>
+                <div class="recipe-card">
+                    <div class="card-image">
+                        <img src="<?= htmlspecialchars($recipe['image']) ?>" alt="<?= htmlspecialchars($recipe['name']) ?>">
+                        <span class="time-badge"><?= $recipe['prep_time_min'] + $recipe['cook_time_min'] ?> хв</span>
+                        <button class="favorite-btn" data-id="<?= $recipe['id'] ?>">
+                            <?php if (isset($user) && $user && isset($_SESSION['user_id']) && $user->isFavorite($_SESSION['user_id'], $recipe['id'])): ?>
+                                ❤️
+                            <?php else: ?>
+                                🤍
+                            <?php endif; ?>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h3><?= htmlspecialchars($recipe['name']) ?></h3>
+                        <p class="description"><?= htmlspecialchars($recipe['description']) ?></p>
+                        <div class="card-footer">
+                            <span class="category-tag"><?= htmlspecialchars($recipe['category_name']) ?></span>
+                            <a href="recipe.php?id=<?= $recipe['id'] ?>" class="details-btn">Рецепт →</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php endforeach; ?>
         </main>
     </div>
-
-    <!-- Фиксированная панель фильтров -->
-    <aside class="filter-sidebar">
-        <div class="filter-section">
-            <h3>Час приготування</h3>
-            <div class="time-range">
-                <input type="range" min="0" max="240" value="120" class="slider" id="timeRange">
-                <div class="time-labels">
-                    <span>0 хв</span>
-                    <span>120 хв</span>
-                    <span>240 хв</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="filter-section">
-            <h3>Категорія</h3>
-            <div class="category-filters">
-                <?php 
-                $categories = array_unique(array_column($recipes, 'category'));
-                foreach($categories as $index => $category): ?>
-                <label class="filter-checkbox">
-                    <input type="checkbox" checked>
-                    <span class="checkmark"></span>
-                    <?= $category ?>
-                </label>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <div class="filter-section">
-            <h3>Тип кухни</h3>
-            <div class="tag-cloud">
-                <span class="tag active">Все</span>
-                <span class="tag">Українська</span>
-                <span class="tag">Італьянська</span>
-                <span class="tag">Азіатська</span>
-                <span class="tag">Вегетаріанська</span>
-            </div>
-        </div>
-    </aside>
 </div>

@@ -12,23 +12,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="head__body" id="header">
-        <a href="main.php" class="image__logo"><img src="Images/logo.png" alt="Кулінарний сайт"></a>
-        <div class="menu">
-            <a class="menu__a" href="catalog.php">
-                <div class="menu__catalog__img"><img src="Images/catalog.png" alt="Каталог"></div>
-                <div class="menu__navigation">Каталог рецептів</div>
-            </a>
-        </div>
-        <div class="center__input__elem">
-            <input type="text" name="search" class="input__search__field" placeholder="Пошук рецептів...">
-            <button class="input__search__img"><img src="Images/search.png" alt="Пошук"></button>
-        </div>
-        <a href="favorite.php" class="image__basket">
-    <img src="Images/heart.png" alt="Обрані рецепти">
-    <span class="favorite-counter" style="<?= empty($_SESSION['favorites']) ? 'display:none' : 'display:flex' ?>">
-        <?= count($_SESSION['favorites'] ?? []) ?>
-    </span>
-</a>
-    </header>
-    <main>
+     <header class="head__body" id="header">
+         <a href="main.php" class="image__logo"><img src="Images/logo.png" alt="Кулінарний сайт"></a>
+         <div class="menu">
+             <a class="menu__a" href="catalog.php">
+                 <div class="menu__catalog__img"><img src="Images/catalog.png" alt="Каталог"></div>
+                 <div class="menu__navigation">Каталог рецептів</div>
+             </a>
+             <?php if (isset($_SESSION['user_id'])): ?>
+                 <a class="menu__a" href="profile.php">
+                     <div class="menu__catalog__img"><img src="/Images/profile.png" alt="Профіль"></div>
+                     <div class="menu__navigation">Профіль</div>
+                 </a>
+                 <a class="menu__a" href="logout.php">
+                     <div class="ex_menu__catalog__img"><img src="/Images/logout.png" alt="Вийти"></div>
+                     <div class="menu__navigation">Вийти</div>
+                 </a>
+             <?php else: ?>
+                 <a class="menu__a" href="login.php">Увійти</a>
+                 <a class="menu__a" href="register.php">Реєстрація</a>
+             <?php endif; ?>
+         </div>
+         <div class="center__input__elem">
+             <form method="GET" action="catalog.php" class="search-form" style="display: flex; align-items: center;">
+                 <input type="text" name="search" class="input__search__field" placeholder="Пошук рецептів...">
+                 <button type="submit" class="input__search__img"><img src="Images/search.png" alt="Пошук"></button>
+             </form>
+         </div>
+         <a href="favorite.php" class="image__basket">
+     <img src="Images/heart.png" alt="Обрані рецепти">
+     <?php
+     $favoriteCount = 0;
+     if (isset($_SESSION['user_id'])) {
+         require_once 'Class/users.php';
+         $user = new User();
+         $favoriteCount = $user->getFavoritesCount($_SESSION['user_id']);
+     }
+     ?>
+     <span class="favorite-counter" style="<?= $favoriteCount == 0 ? 'display:none' : 'display:flex' ?>">
+         <?= $favoriteCount ?>
+     </span>
+ </a>
+     </header>
+     <main>
+
+
+

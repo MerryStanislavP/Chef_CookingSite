@@ -61,6 +61,12 @@ body {
     top: 7px;
 }
 
+.ex_menu__catalog__img img {
+    height: 60px;
+    margin-right: 0.1rem;
+    margin-top: 10px;
+}
+
 .center__input__elem {
     display: flex;
     align-items: center;
@@ -90,7 +96,8 @@ body {
 
 .image__basket {
     position: relative;
-    left: -300px;
+    min-width: 56px;
+    right: 80px;
 }
 
 .image__basket img {

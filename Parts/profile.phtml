@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="Style/login.css">
+<div class="auth">
+    <div class="auth-container">
+        <h1>Профіль користувача</h1>
+        
+        <?php if ($error): ?>
+            <div class="error-message"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
+        
+        <form method="POST" class="auth-form">
+            <div class="form-group">
+                <label for="name">Ім'я</label>
+                <input type="text" id="name" name="name" value="<?= htmlspecialchars($userData['name']) ?>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="login">Логін</label>
+                <input type="text" id="login" value="<?= htmlspecialchars($userData['login']) ?>" disabled>
+            </div>
+            
+            <div class="form-group">
+                <label for="current_password">Поточний пароль</label>
+                <input type="password" id="current_password" name="current_password">
+            </div>
+            
+            <div class="form-group">
+                <label for="new_password">Новий пароль</label>
+                <input type="password" id="new_password" name="new_password">
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password">Підтвердіть новий пароль</label>
+                <input type="password" id="confirm_password" name="confirm_password">
+            </div>
+            
+            <button type="submit" class="auth-button">Зберегти зміни</button>
+        </form>
+        
+        <div class="auth-links">
+            <a href="logout.php" class="logout-link">Вийти</a>
+        </div>
+    </div>
+</div> 

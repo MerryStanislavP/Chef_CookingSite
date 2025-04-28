@@ -6,7 +6,8 @@ $min_time = $_GET['min_time'] ?? 0;
 $max_time = $_GET['max_time'] ?? 240;
 $selected_categories = $_GET['categories'] ?? [];
 
-$recipes = getSampleRecipes();
+$recipeManager = new Recipe();
+$recipes = $recipeManager->getAllRecipes();
 $filtered = array_filter($recipes, function($recipe) use ($min_time, $max_time, $selected_categories) {
     $time_ok = $recipe->price >= $min_time && $recipe->price <= $max_time;
     $category_ok = empty($selected_categories) || in_array($recipe->category, $selected_categories);

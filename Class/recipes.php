@@ -1,58 +1,76 @@
 <?php
+require_once 'db.php';
+
 class Recipe
 {
-    public $id;
-    public $name;
-    public $category;
-    public $image;
-    public $description;
-    public $ingredients;
-    public $instructions;
-    public $price;
+    private $db;
 
-    public function __construct(
-        $id,
-        $name,
-        $category,
-        $image,
-        $description,
-        $ingredients,
-        $instructions,
-        $price
-    ) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->category = $category;
-        $this->image = $image;
-        $this->description = $description;
-        $this->ingredients = $ingredients;
-        $this->instructions = $instructions;
-        $this->price = $price;
+    public function __construct() {
+        $this->db = Database::getInstance();
     }
-}
 
-// Приклад даних рецептів
-function getSampleRecipes() {
-    return [
-        new Recipe(0, "Борщ", "Супи", "Images/borshch.jpg", "Традиційний український борщ", ["буряк", "картопля", "морква"], ["Нарізати овочі", "Варити 30 хвилин"], 120),
-        new Recipe(1, "Вареники", "Основні страви", "Images/varenyky.jpg", "Вареники з картоплею", ["тісто", "картопля", "цибуля"], ["Замісити тісто", "Ліпити вареники"], 60),
-        new Recipe(2, "Маца", "Випічка", "Images/matza.jpg", "Традиційний єврейський коржик", ["борошно", "вода", "сіль"], ["Змішати інгредієнти", "Тонко розкатати", "Випікати при 200°C 2-3 хвилини"], 15),
-        new Recipe(3, "Оладки", "Сніданки", "Images/oladky.jpg", "Млинецькі оладки", ["борошно", "яйця", "молоко"], ["Змішати інгредієнти", "Смажити на пательні"], 30),
-        new Recipe(4, "Салат Цезар", "Салати", "Images/cesar.jpg", "Класичний салат Цезар", ["куряче філе", "салат", "крутони"], ["Нарізати інгредієнти", "Змішати"], 45),
-        new Recipe(5, "Піца", "Основні страви", "Images/pizza.jpg", "Домашня піца", ["тісто", "томатний соус", "сир"], ["Розкачати тісто", "Випікати 20 хв"], 60),
-        new Recipe(6, "Чізкейк", "Десерти", "Images/cheesecake.jpg", "Ніжний чізкейк", ["сир", "печиво", "вершки"], ["Приготувати основу", "Випікати 1 годину"], 180),
-        new Recipe(7, "Шаурма", "Фастфуд", "Images/shaurma.jpg", "Домашня шаурма", ["лаваш", "куряче філе", "овочі"], ["Загорнути начинку", "Підсмажити"], 40),
-        new Recipe(8, "Гречана каша", "Каші", "Images/grechka.jpg", "Гречка з грибами", ["гречка", "гриби", "цибуля"], ["Варити гречку", "Смажити гриби"], 30)
-    ];
-}
-
-function getFavoriteRecipes() {
-    if (!isset($_SESSION['favorites'])) {
-        $_SESSION['favorites'] = [];
+    public function getAllRecipes() {
+        $sql = "SELECT r.*, c.name as category_name 
+                FROM recipes r 
+                JOIN categories c ON r.category_id = c.id 
+                ORDER BY r.created_at DESC";
+        return $this->db->query($sql)->fetchAll();
     }
-    $allRecipes = getSampleRecipes();
-    return array_filter($allRecipes, function($recipe) {
-        return isset($_SESSION['favorites'][$recipe->id]);
-    });
+
+    public function getRecipeById($id) {
+        $sql = "SELECT r.*, c.name as category_name 
+                FROM recipes r 
+                JOIN categories c ON r.category_id = c.id 
+                WHERE r.id = ?";
+        return $this->db->query($sql, [$id])->fetch();
+    }
+
+    public function getRecipeIngredients($recipeId) {
+        $sql = "SELECT i.name, ri.quantity, ri.unit, ri.note 
+                FROM recipe_ingredients ri 
+                JOIN ingredients i ON ri.ingredient_id = i.id 
+                WHERE ri.recipe_id = ? 
+                ORDER BY i.name";
+        return $this->db->query($sql, [$recipeId])->fetchAll();
+    }
+
+    public function getRecipeSteps($recipeId) {
+        $sql = "SELECT step_no, text, image 
+                FROM recipe_steps 
+                WHERE recipe_id = ? 
+                ORDER BY step_no";
+        return $this->db->query($sql, [$recipeId])->fetchAll();
+    }
+
+    public function getRecipeTags($recipeId) {
+        $sql = "SELECT t.name 
+                FROM recipe_tags rt 
+                JOIN tags t ON rt.tag_id = t.id 
+                WHERE rt.recipe_id = ?";
+        return $this->db->query($sql, [$recipeId])->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    public function searchRecipes($query) {
+        $sql = "SELECT r.*, c.name as category_name 
+                FROM recipes r 
+                JOIN categories c ON r.category_id = c.id 
+                WHERE MATCH(r.name, r.description) AGAINST(? IN BOOLEAN MODE)";
+        return $this->db->query($sql, [$query])->fetchAll();
+    }
+
+    public function getRecipesByCategory($categoryId) {
+        $sql = "SELECT r.*, c.name as category_name 
+                FROM recipes r 
+                JOIN categories c ON r.category_id = c.id 
+                WHERE r.category_id = ? 
+                ORDER BY r.created_at DESC";
+        return $this->db->query($sql, [$categoryId])->fetchAll();
+    }
+
+    public function getCategories() {
+        $sql = "SELECT * FROM categories ORDER BY name";
+        return $this->db->query($sql)->fetchAll();
+    }
 }
 ?>
+
