@@ -8,11 +8,11 @@
                     $this->db = Database::getInstance();
                 }
 
-                public function register($name, $login, $password) {
+                public function register($name, $login, $password, $role = 'user') {
                     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
                     
-                    $sql = "INSERT INTO users (name, login, password_hash) VALUES (?, ?, ?)";
-                    $this->db->query($sql, [$name, $login, $passwordHash]);
+                    $sql = "INSERT INTO users (name, login, password_hash, role) VALUES (?, ?, ?, ?)";
+                    $this->db->query($sql, [$name, $login, $passwordHash, $role]);
                     
                     return $this->db->getConnection()->lastInsertId();
                 }
@@ -79,6 +79,12 @@
                 public function getFavoritesCount($userId) {
                     $sql = "SELECT COUNT(*) FROM user_favorites WHERE user_id = ?";
                     return $this->db->query($sql, [$userId])->fetchColumn();
+                }
+
+                public function isAdmin($userId) {
+                    $sql = "SELECT role FROM users WHERE id = ?";
+                    $user = $this->db->query($sql, [$userId])->fetch();
+                    return $user && $user['role'] === 'admin';
                 }
             }
         ?>
