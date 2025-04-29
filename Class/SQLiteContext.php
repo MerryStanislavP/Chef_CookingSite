@@ -40,7 +40,6 @@ class SQLiteContext {
         try {
             $stmt = $this->connection->prepare($sql);
             
-            // Bind parameters if provided
             if (!empty($params)) {
                 $i = 1;
                 foreach ($params as $param) {

@@ -37,7 +37,10 @@
         </form>
         
         <div class="auth-links">
+            <?php if ($userData['role'] === 'admin'): ?>
+                <a href="admin/logs.php" class="admin-link">Переглянути логи</a>
+            <?php endif; ?>
             <a href="logout.php" class="logout-link">Вийти</a>
         </div>
     </div>
-</div> 
+</div>

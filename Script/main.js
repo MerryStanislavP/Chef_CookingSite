@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Обробка додавання/видалення з обраного
+   
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('favorite-btn')) {
             const recipeId = e.target.getAttribute('data-id');
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Обробка фільтрів
+    
     const filterForm = document.querySelector('.filters');
     if (filterForm) {
         const inputs = filterForm.querySelectorAll('input');
@@ -35,7 +35,7 @@ function toggleFavorite(recipeId, button) {
         if (data.success) {
             button.innerHTML = data.icon;
             
-            // Находим или создаём счётчик
+           
             let counter = document.querySelector('.favorite-counter');
             const heartIcon = document.querySelector('.image__basket img');
             
@@ -46,23 +46,23 @@ function toggleFavorite(recipeId, button) {
             }
             
             if (counter) {
-                // Обновляем количество
+                
                 const currentCount = parseInt(counter.textContent || 0);
                 counter.textContent = data.is_favorite ? currentCount + 1 : currentCount - 1;
                 
-                // Управляем видимостью
+                
                 if (parseInt(counter.textContent) <= 0) {
-                    counter.remove(); // Удаляем если 0
+                    counter.remove(); 
                 } else {
                     counter.style.display = 'flex';
                 }
             }
             
-            // Если мы на странице избранного - удаляем карточку при удалении
+            
             if (window.location.pathname.includes('favorite.php') && !data.is_favorite) {
                 button.closest('.recipe-card, .body__elem').remove();
                 
-                // Обновляем заголовок если список пуст
+             
                 if (document.querySelectorAll('.recipe-card, .body__elem').length === 0) {
                     document.querySelector('.favorites h1').insertAdjacentHTML('afterend', 
                         '<p>У вас поки що немає обраних рецептів</p>');

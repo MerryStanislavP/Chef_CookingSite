@@ -71,7 +71,7 @@
     font-weight: 500;
 }
 .error-message {
-    background: #ffe0e0;
+    background: #d35400;
     color: #c0392b;
     border-radius: 6px;
     padding: 10px 14px;
@@ -79,3 +79,23 @@
     text-align: center;
     font-size: 1rem;
 } 
+.admin-link {
+    display: inline-flex;
+    align-items: center;
+    background: #ffe0e0;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+    transition: all 0.3s ease;
+    margin-right: 35px;
+}
+
+.admin-link:hover {
+    background: #f19191;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
