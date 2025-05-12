@@ -1,8 +1,9 @@
 <?php
 session_start();
-require_once 'Class/db.php';
-require_once 'Class/users.php';
-require_once 'Class/pages.php';
+require_once 'autoload.php';
+
+use App\Models\User;
+use App\Views\LoginPage;
 
 $error = '';
 $page = new LoginPage($error);

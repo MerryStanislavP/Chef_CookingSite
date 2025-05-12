@@ -10,27 +10,33 @@
         <form method="POST" class="auth-form">
             <div class="form-group">
                 <label for="name">Ім'я</label>
-                <input type="text" id="name" name="name" value="<?= htmlspecialchars($userData['name']) ?>" required>
+                <input type="text" id="name" name="name" value="<?= htmlspecialchars($userData['name']) ?>" required class="form-input">
             </div>
             
             <div class="form-group">
                 <label for="login">Логін</label>
-                <input type="text" id="login" value="<?= htmlspecialchars($userData['login']) ?>" disabled>
+                <input type="text" id="login" value="<?= htmlspecialchars($userData['login']) ?>" disabled class="form-input">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="<?= htmlspecialchars($userData['email'] ?? '') ?>" class="form-input">
+                <small class="form-text">Необов'язкове поле. Наприклад: user@example.com</small>
             </div>
             
             <div class="form-group">
                 <label for="current_password">Поточний пароль</label>
-                <input type="password" id="current_password" name="current_password">
+                <input type="password" id="current_password" name="current_password" class="form-input">
             </div>
             
             <div class="form-group">
                 <label for="new_password">Новий пароль</label>
-                <input type="password" id="new_password" name="new_password">
+                <input type="password" id="new_password" name="new_password" class="form-input">
             </div>
             
             <div class="form-group">
                 <label for="confirm_password">Підтвердіть новий пароль</label>
-                <input type="password" id="confirm_password" name="confirm_password">
+                <input type="password" id="confirm_password" name="confirm_password" class="form-input">
             </div>
             
             <button type="submit" class="auth-button">Зберегти зміни</button>
@@ -44,3 +50,63 @@
         </div>
     </div>
 </div>
+
+<style>
+.form-text {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 4px;
+    display: block;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fafafa;
+    transition: border 0.2s;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    border: 1.5px solid #e76f51;
+    outline: none;
+}
+
+.form-email-valid {
+    border-color: #28a745 !important;
+}
+
+.form-email-invalid {
+    border-color: #dc3545 !important;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const emailInput = document.getElementById('email');
+    
+    emailInput.addEventListener('blur', function() {
+        validateEmail(this.value);
+    });
+    
+    function validateEmail(email) {
+        if (email.trim() === '') {
+            emailInput.classList.remove('form-email-valid', 'form-email-invalid');
+            return;
+        }
+        
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+        if (emailRegex.test(email)) {
+            emailInput.classList.remove('form-email-invalid');
+            emailInput.classList.add('form-email-valid');
+        } else {
+            emailInput.classList.remove('form-email-valid');
+            emailInput.classList.add('form-email-invalid');
+        }
+    }
+});
+</script>

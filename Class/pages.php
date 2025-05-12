@@ -1,4 +1,9 @@
 <?php 
+namespace App\Views;
+
+use App\Models\User;
+use App\Models\Recipe;
+
 class Page 
 {
     public $title;
@@ -75,7 +80,6 @@ class RecipePage extends Page
         $this->steps = $steps;
         $this->tags = $tags;
         $this->user = $user;
-        require_once 'Class/recipes.php';
     }
     
     public function ShowContent()
@@ -119,7 +123,6 @@ class FavoritePage extends Page
     {
         parent::__construct("Обрані рецепти");
         $this->favorites = $favorites;
-        require_once 'Class/recipes.php';
     }
     
     public function ShowContent(){

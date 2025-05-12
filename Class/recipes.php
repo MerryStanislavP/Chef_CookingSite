@@ -1,4 +1,6 @@
 <?php
+namespace App\Models;
+
 require_once 'db.php';
 
 class Recipe
@@ -47,7 +49,7 @@ class Recipe
                 FROM recipe_tags rt 
                 JOIN tags t ON rt.tag_id = t.id 
                 WHERE rt.recipe_id = ?";
-        return $this->db->query($sql, [$recipeId])->fetchAll(PDO::FETCH_COLUMN);
+        return $this->db->query($sql, [$recipeId])->fetchAll(\PDO::FETCH_COLUMN);
     }
 
     public function searchRecipes($query) {

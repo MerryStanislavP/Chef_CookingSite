@@ -1,9 +1,10 @@
 <?php
 session_start();
-require_once 'Class/db.php';
-require_once 'Class/recipes.php';
-require_once 'Class/users.php';
-require_once 'Class/pages.php';
+require_once 'autoload.php';
+
+use App\Models\User;
+use App\Models\Recipe;
+use App\Views\FavoritePage;
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");

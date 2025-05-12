@@ -1,9 +1,10 @@
 <?php
 session_start();
-require_once 'Class/db.php';
-require_once 'Class/recipes.php';
-require_once 'Class/pages.php';
-require_once 'Class/users.php';
+require_once 'autoload.php';
+
+use App\Models\Recipe;
+use App\Models\User;
+use App\Views\RecipePage;
 
 $recipeId = $_GET['id'] ?? null;
 if (!$recipeId) {

@@ -1,8 +1,10 @@
 <?php
 session_start();
-require_once 'Class/db.php';
-require_once 'Class/recipes.php';
-require_once 'Class/pages.php';
+require_once 'autoload.php';
+
+use App\Models\Recipe;
+use App\Models\User;
+use App\Views\CatalogPage;
 
 $recipeManager = new Recipe();
 $categoryId = $_GET['category'] ?? null;
@@ -20,7 +22,6 @@ $categories = $recipeManager->getCategories();
 
 $user = null;
 if (isset($_SESSION['user_id'])) {
-    require_once 'Class/users.php';
     $user = new User();
 }
 

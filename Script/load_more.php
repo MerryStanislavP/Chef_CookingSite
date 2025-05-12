@@ -1,6 +1,9 @@
 <?php
 session_start();
+require_once '../autoload.php';
 require_once '../Class/recipes.php';
+
+use App\Models\Recipe;
 
 $offset = $_POST['offset'] ?? 0;
 $limit = $_POST['limit'] ?? 6;

@@ -44,8 +44,7 @@
      <?php
      $favoriteCount = 0;
      if (isset($_SESSION['user_id'])) {
-         require_once 'Class/users.php';
-         $user = new User();
+         $user = new App\Models\User();
          $favoriteCount = $user->getFavoritesCount($_SESSION['user_id']);
      }
      ?>

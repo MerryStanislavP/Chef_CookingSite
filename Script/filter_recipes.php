@@ -1,6 +1,9 @@
 <?php
+require_once __DIR__.'/../autoload.php';
 require_once __DIR__.'/../Class/recipes.php';
 session_start();
+
+use App\Models\Recipe;
 
 $min_time = $_GET['min_time'] ?? 0;
 $max_time = $_GET['max_time'] ?? 240;

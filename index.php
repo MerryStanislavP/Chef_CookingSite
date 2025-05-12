@@ -1,9 +1,11 @@
 <?php
 session_start();
-require_once 'Class/db.php';
-require_once 'Class/recipes.php';
-require_once 'Class/pages.php';
-require_once 'Class/Logger.php';
+require_once 'autoload.php';
+
+use App\Models\Recipe;
+use App\Models\User;
+use App\Utils\Logger;
+use App\Views\MainPage;
 
 $startTime = microtime(true);
 
@@ -13,7 +15,6 @@ $categories = $recipeManager->getCategories();
 
 $user = null;
 if (isset($_SESSION['user_id'])) {
-    require_once 'Class/users.php';
     $user = new User();
 }
 
