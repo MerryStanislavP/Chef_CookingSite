@@ -165,7 +165,7 @@ class Logger {
 
     public function logUserActivity($userId, $actionType, $actionDetails = null, $ip = null, $requestId = null) {
         try {
-            // Начинаем транзакцию
+            
             $this->db->exec('BEGIN TRANSACTION');
             
             $sql = "INSERT INTO user_activity_logs (user_id, action_type, action_details, ip_address, request_id)
@@ -184,12 +184,12 @@ class Logger {
                 throw new \Exception("Ошибка при логировании активности пользователя");
             }
             
-            // Фиксируем транзакцию
+            
             $this->db->exec('COMMIT');
             
             return $this->db->lastInsertRowID();
         } catch (\Exception $e) {
-            // Откатываем транзакцию в случае ошибки
+           
             $this->db->exec('ROLLBACK');
             error_log("Failed to log user activity: " . $e->getMessage());
             return false;
